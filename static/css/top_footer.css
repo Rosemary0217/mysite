@@ -1,0 +1,69 @@
+body {
+    background-image: url(../../static/images/background.jpg);
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+#footer {
+    background-color: #000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    left: 0;
+}
+
+#footer p {
+    color: white;
+    text-align: center;
+    font-size: larger;
+}
+
+.top {
+    /* 设置宽度高度背景颜色 */
+    height: 60px; /*高度改为自动高度*/
+    width: 100%;
+    background: rgb(44, 44, 44);
+    position: fixed; /*固定在顶部*/
+    top: 0; /*离顶部的距离为0*/
+    left: 0;
+}
+
+.top ul {
+    /* 清除ul标签的默认样式 */
+    width: auto; /*宽度也改为自动*/
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+.top li {
+    float: right; /* 使li内容横向浮动，即横向排列  */
+    margin-right: 2%; /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top li a {
+    /* 设置链接内容显示的格式*/
+    display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
+    color: white;
+    text-align: center;
+    padding: 3px;
+    text-decoration: none; /* 去除下划线 */
+    font-size: large;
+}
+
+.a {
+    font-family: "Microsoft JhengHei";
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 15px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 3px;
+}
+

@@ -1,0 +1,41 @@
+.nav11 {
+    /* 设置宽度高度背景颜色 */
+    height: 45px; /*高度改为自动高度*/
+    width: 100%;
+    margin-left: 0;
+    position: relative; /*固定在顶部*/
+    top: 5%; /*离顶部的距离为0*/
+    margin-bottom: 5px;
+    border-bottom: 1px solid #fff; /* 添加下边框 */
+
+}
+
+.nav11 ul {
+    /* 清除ul标签的默认样式 */
+    width: auto; /*宽度也改为自动*/
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 1%;
+    /* margin-top: 0;          */
+    padding: 0;
+
+}
+
+.nav11 li {
+    float: left; /* 使li内容横向浮动，即横向排列  */
+    margin-right: 2%; /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.nav11 li a {
+    /* 设置链接内容显示的格式*/
+    display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
+    color: white;
+    text-align: center;
+    padding: 12px;
+    overflow: hidden;
+    text-decoration: none; /* 去除下划线 */
+
+}
