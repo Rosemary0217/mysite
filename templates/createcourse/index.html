@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-image: url("../../static/images/bg.jpg");
+            background-size: cover;
+        }
+        .a{
+            position: relative;
+            top: 250px;
+            width: 1200px;
+            display: flex;
+            justify-content: center;
+            margin: 0 30px;
+        }
+        .d{
+            text-decoration: none;
+            color: rgb(75, 30, 30);
+            font: 600 30px '';
+            line-height: 150px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="a" style="background-color: aliceblue;opacity:0.8;">
+        <a href="{% url 'createcourse' %}" class="d">创建课程</a>
+    </div>
+    <div class="a" style="background-color: aliceblue;opacity:0.8;">
+        <a href="{% url 'createquestion' %}" class="d">创建题目</a>
+    </div>
+    <div class="a" style="background-color: aliceblue;opacity:0.8;">
+        <a href="{% url 'viewcourses' %}" class="d">我的课程</a>
+    </div>
+    <div class="a" style="background-color: aliceblue;opacity:0.8;">
+        <a href="{% url 'searchquestion' %}" class="d">搜索题目</a>
+    </div>
+</body>
+</html>

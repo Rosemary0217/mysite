@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索题目</title>
+    {% load static %}
+
+    <style>
+        /* 设置下拉按钮的样式 */
+        .dropbtn {
+            position: relative;
+            left: 15%;
+            background-color: #ffffff;
+            color: #333333;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+                        width: 400px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid white;
+        }
+
+        /* 容器 <div> - 需要放置下拉内容 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 下拉内容（默认隐藏） */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* 下拉链接 */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 悬停时更改下拉链接的颜色 */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        /* 悬停时显示下拉菜单 */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 显示下拉内容时，更改下拉按钮的背景颜色 */
+        .dropdown:hover .dropbtn {
+            background-color: #6c757d;
+        }
+
+        #main {
+            width: 480px;
+            height: 200px;
+        {% comment %} background-image: url("/static/images/bg.jpg"); {% endcomment %} opacity: 0.9; /*透明度 0-1*/
+            border-radius: 10px;
+            position: relative;
+            left: 1%;
+            top: 20%;
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+
+        a {
+            text-decoration: none; /*去掉文本线*/
+        }
+
+        .p1 {
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .inp0 {
+            width: 400px;
+            height: 60px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none; /*获得焦点时无任何显示*/
+            text-indent: 1em; /*缩进*/
+            font-size: 13px;
+        }
+
+        .inp1 {
+            width: 360px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none; /*获得焦点时无任何显示*/
+            text-indent: 1em; /*缩进*/
+            font-size: 13px;
+        }
+
+        .p2 {
+            width: 400px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid white;
+            background-color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .p2:hover {
+            cursor: pointer;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+
+</head>
+<body>
+<div class="top">
+    <ul>
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——搜索题目</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+<ul>
+    <li role="presentation">
+        {% if is_teacher %}
+            <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}"
+                               style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="#" style="color: white">搜索题目</a></li>
+</ul>
+</div>
+<br>
+<form action="searchquestion_search" method="post">
+    {% csrf_token %}
+    <div id="main">
+        <p class="p1">
+            <input type="text" name="keyword" placeholder="请输入搜索关键词" class="inp0">
+        </p>
+        <p class="p1">
+            <select id="number" name="number" style="width:200px">
+                <option value="">请选择要显示的结果数量</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+            </select>
+        </p>
+        <p class="p1">
+            <button type="submit" class="p2">搜索</button>
+        </p>
+    </div>
+</form>
+
+<!-- Single button -->
+<!-- Split button -->
+<div class="dropdown">
+  <button class="dropbtn">按照学科进行搜索</button>
+  <div class="dropdown-content" style="position:relative;left: 15%">
+    <form action="searchquestion_by_tag" method="post">
+        {% csrf_token %}
+            {% for tag in tag_list %}
+                <p>
+                    <button class="p2"  type="submit" name="chosen_tag" value={{tag}}>{{tag}}</button>
+                </p>
+            {% endfor %}
+    </form>
+  </div>
+</div>
+{#    <a href="/searchquestion/searchquestion_by_tag_index">按学科显示</a>#}
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+</body>
+</html>

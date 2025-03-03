@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建课程</title>
+<!--     {% load static %}-->
+<!--    <link rel="stylesheet" href="{% static 'css/css.css' %}"/>-->
+ <link rel="stylesheet" type="text/css" href="../../static/css/style1.css">
+{#    <style>#}
+{#        body{#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            background-image: url("/static/images/bg.jpg");#}
+{#            background-size: cover;#}
+{#        }#}
+{#        #main{#}
+{#            width: 480px;#}
+{#            height: 330px;#}
+{#            background-image: url("/static/images/bg.jpg");#}
+{#            opacity:0.9;/*透明度 0-1*/#}
+{#            border-radius: 10px;#}
+{#            position: absolute;#}
+{#            right: 30%;#}
+{#            top: 20%;#}
+{#        }#}
+{#        h1{#}
+{#            font-size: 30px;#}
+{#            font-weight: bold;#}
+{#            margin-top: 30px;#}
+{#            margin-left: 20px;#}
+{#        }#}
+{#        .register{#}
+{#            margin-left: 20px;#}
+{#            color:silver;#}
+{#            font-size: 10px;#}
+{#        }#}
+{#        a{#}
+{#            text-decoration: none;/*去掉文本线*/#}
+{#        }#}
+{#        .p1{#}
+{#            line-height: 50px;#}
+{#            text-align: center;#}
+{#        }#}
+{#        .inp0{#}
+{#            width: 360px;#}
+{#            height: 50px;#}
+{#            border-radius: 5px;#}
+{#            background-color: aliceblue;#}
+{#            border: 1px solid white;#}
+{#            outline: none;/*获得焦点时无任何显示*/#}
+{#            text-indent: 1em;/*缩进*/#}
+{#            font-size: 13px;#}
+{#        }#}
+{#        .inp1{#}
+{#            width: 360px;#}
+{#            height: 200px;#}
+{#            border-radius: 5px;#}
+{#            background-color: aliceblue;#}
+{#            border: 1px solid white;#}
+{#            outline: none;/*获得焦点时无任何显示*/#}
+{#            text-indent: 1em;/*缩进*/#}
+{#            font-size: 13px;#}
+{#        }#}
+{#        .p2{#}
+{#            width: 48]px;#}
+{#            height: 37px;#}
+{#            border-radius: 10px;#}
+{#            border: 1px solid white;#}
+{#            background-color: skyblue;#}
+{#            font-size: 18px;#}
+{#            font-weight: bold;#}
+{#            color: white;#}
+{#        }#}
+{#        .p2:hover{#}
+{#            cursor:pointer;#}
+{#        }#}
+{##}
+{#    </style>#}
+</head>
+<body>
+    <h1>创建课程</h1>
+    <form action="createcourse_result" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="main">
+            <p class="p1">
+                课程名称:<input type="text" name="coursename" placeholder="请输入课程名称" class="inp0">
+            </p>
+            <p class="p1">
+                课程描述:<input type="text" name="description" placeholder="请输入课程描述" class="inp1">
+            </p>
+            <div class="p1">
+                （可选）上传学生名单
+                <div style="float: inline-start;" class="p1">
+                    <!--
+                    <form action="{% url 'uploadfile_doupload'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input style="margin-left: 18%;" type="file" name="doc">
+                    </form>
+                    -->
+                     <input type="file" name="enrollment">
+                </div>
+            </div>
+            <p class="p1">
+                <button type="submit" class="p2">提交</button>
+            </p>
+        </div>
+    </form>
+</body>
+</html>

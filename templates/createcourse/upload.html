@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建课程</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style1.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="top">
+    <ul>
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——创建课程</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+    <ul>
+        <li><a href="{% url 'indexteacher' %}">个人主页</a></li>
+        <li><a href="#" class="disabled"> 创建课程</a></li>
+    </ul>
+</div>
+
+
+<form action="createcourse_result" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p class="p1">
+        <span style="color: white; font-size: large;position: relative;left: 1%">课程名称: </span>
+        <input type="text" name="coursename" placeholder="请输入课程名称"
+               style="margin-left: 20px;font-size: larger;width: 300px">
+    </p>
+    <br>
+    <div style="display: flex; align-items: center;">
+        <span style="color:white; font-size:large;position: relative;left: 1%">课程描述：</span>
+        <div style="flex: 1;">
+            <textarea class="form-control" rows="3" id="content" name="description" placeholder="请输入课程描述"
+                      style="position: relative;margin-left: 10px;width: 800px"></textarea>
+        </div>
+    </div>
+    <br><br>
+    <span style="color: white; font-size: large;position: relative;left: 1%">上传学生名单: </span>
+    <input type="file" name="enrollment" class="file-input"
+           style="color: white;margin-left: 10px;position: relative;left: 0.5%">
+
+    <br><br>
+    <input type="submit" value="提交" style="font-size: large; position: relative; left: 1%;"> </input>
+</form>
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+
+</body>
+</html>

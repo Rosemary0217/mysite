@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按学科查看题库</title>
+    {% load static %}
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-image: url("/static/images/bg.jpg");
+            background-size: cover;
+        }
+        #main{
+            width: 480px;
+            height: 330px;
+            background-image: url("/static/images/bg.jpg");
+            opacity:0.9;/*透明度 0-1*/
+            border-radius: 10px;
+            position: absolute;
+            right: 30%;
+            top: 20%;
+        }
+        #answer{
+            width: 480px;
+            height: 45px;
+            text-align: center;
+            font-size: 20px;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+        a{
+            text-decoration: none;/*去掉文本线*/
+        }
+        .p1{
+            line-height: 50px;
+            text-align: center;
+        }
+        .inp0{
+            width: 360px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none;/*获得焦点时无任何显示*/
+            text-indent: 1em;/*缩进*/
+            font-size: 13px;
+        }
+        .inp1{
+            width: 360px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none;/*获得焦点时无任何显示*/
+            text-indent: 1em;/*缩进*/
+            font-size: 13px;
+        }
+        .p2{
+            width: 400px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid white;
+            background-color: skyblue;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+        .p2:hover{
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="searchquestion_by_tag" method="post">
+        {% csrf_token %}
+        <div id="main">
+            {% for tag in tag_list %}
+                <p class="p1">
+                    <button type="submit" class="p2" name="chosen_tag" value={{tag}}>{{tag}}</button>
+                </p>
+            {% endfor %}
+        </div>
+    </form>
+</body>
+</html>

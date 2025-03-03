@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建题目</title>
+    {% load static %}
+
+    <style>
+        #main {
+            width: 480px;
+            height: 330px;
+            opacity: 0.9; /*透明度 0-1*/
+            border-radius: 10px;
+            position: relative;
+            left: 1%;
+        }
+
+        #answer {
+            width: 480px;
+            height: 45px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .register {
+            margin-left: 20px;
+            color: silver;
+            font-size: 10px;
+        }
+
+        .p1 {
+            line-height: 50px;
+            position: relative;
+            left: 1%;
+        }
+
+        .p3 {
+            line-height: 35px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .inp0 {
+            width: 360px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none; /*获得焦点时无任何显示*/
+            text-indent: 1em; /*缩进*/
+            font-size: 13px;
+        }
+
+        .p2 {
+            width: 500px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid white;
+            background-color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .p2:hover {
+            cursor: pointer;
+        }
+
+        .d {
+            text-decoration: none;
+            color: rgb(75, 30, 30);
+            font: 600 30px '';
+            line-height: 150px;
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style1.css">
+
+    <style>
+        .button-link {
+            display: inline-block;
+            padding: 10px 220px;
+            background-color: #FFFFFF;
+            color: white;
+            text-decoration: none;
+            border: 1px solid #337ab7;
+            border-radius: 5px;
+            color: #333333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .button-link:hover {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+<div class="top">
+    <ul>
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——创建题目</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+<ul>
+
+    <li role="presentation">
+        {% if is_teacher %}
+            <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}"
+                               style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="#" style="color: white">创建题目</a></li>
+
+</ul>
+</div>
+
+<form action="createquestion_result" method="post">
+    {% csrf_token %}
+    <div id="main">
+        <p class="p1" style="color: white">
+            &nbsp &nbsp题目内容：<textarea class="form-control" rows="10" id="content" name="content"
+                                          style="width: 500px;margin-left: 10px"
+                                          placeholder="请输入题目内容"></textarea>
+        </p>
+
+        &nbsp &nbsp &nbsp<span style="color: white">题目答案：</span>
+        <div id="answer" style="color: white">
+            <input type="checkbox" name="option" value="A">A
+            <input type="checkbox" name="option" value="B">B
+            <input type="checkbox" name="option" value="C">C
+            <input type="checkbox" name="option" value="D">D
+        </div>
+
+        <p class="p1">
+        <div style="color: white"> &nbsp &nbsp &nbsp是否公开:
+            <label><input type="radio" name="choice" value="1">是</label>
+            <label><input type="radio" name="choice" value="0">否</label>
+        </div>
+        </p>
+
+        &nbsp &nbsp &nbsp<span style="color: white">题目标签：</span>
+        <div id="tag" class="p3">
+            <select name="tag">
+                <option value="NULL">--请选择题目标签--</option>
+                {% for tag in tag_list %}
+                    <option value={{ tag }}>{{ tag }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <p class="p1">
+            <button type="submit" class="p2">创建题目</button>
+        </p>
+    </div>
+</form>
+<br><br><br><br><br><br><br><br><br>
+<div class="p1">
+    <a href="{% url 'searchquestion' %}" class="button-link">搜索题目</a>
+</div>
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+</body>
+</html>

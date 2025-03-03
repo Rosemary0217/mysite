@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-image: url("../../static/images/bg.jpg");
+            background-size: cover;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            position: absolute;
+            left: 10%;
+            top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'course_detail' course_id %}">返回</a>
+    <br></br>
+    <h1>{{msg}}</h1>
+</body>
+</html>

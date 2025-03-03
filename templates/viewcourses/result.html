@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建课程</title>
+     {% load static %}
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-image: url("../../static/images/bg.jpg");
+            background-size: cover;
+        }
+        #main{
+            width: 480px;
+            height: 330px; 
+            opacity:0.9;/*透明度 0-1*/
+            border-radius: 10px;
+            position: absolute;
+            right: 30%;
+            top: 20%;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            position: absolute;
+            left: 10%;
+            top: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/">返回</a>
+    <br></br>
+    <h1>{{course_info.1}}</h1>
+    <div id="main">
+        <p class="p1">
+            课程编号:{{course_info.0}}
+        </p>
+        <p class="p1">                
+            课程简介:{{course_info.2}}
+        </p>
+    </div>
+</body>
+</html>
