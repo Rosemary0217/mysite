@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程详情</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style1.css">
+
+    <style>
+        .layout {
+            width: 1366px;
+            height: 600px;
+
+            display: grid;
+            grid:
+    "sidebar body" 1fr
+    / 60% 40%;
+            gap: 8px;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .body {
+            grid-area: body;
+        }
+
+        .layout1 {
+            width: 800px;
+            height: 600px;
+
+            display: grid;
+            grid-template-rows: 10% 30%;
+            grid-template-columns: 1fr;
+            gap: 8px;
+
+            justify-content: start;
+        }
+
+        .a1 {
+            font-family: "Microsoft JhengHei";
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+<script type="text/javascript" language="JavaScript">
+    function delete_() {
+        if (confirm("确定要删除吗?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<div class="top">
+    <ul>
+
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——{{ course.course_name }}</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+<div class="nav11">
+    <ul>
+        <li role="presentation">
+            {% if is_teacher %}
+                <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+            {% endif %}
+            {% if is_teacher == False %}
+                <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+            {% endif %}
+        </li>
+        <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+        <li role="presentation"><a href="#" style="color: white">{{ course.course_name }}</a></li>
+    </ul>
+
+</div>
+
+
+<p>
+    {% if flag == False %}
+        <a class="a1" href="{% url 'answer_question' course.course_id %}"
+           style="color: white;position:relative;left: 1%;font-size: larger"> 答题 </a>
+    {% endif %}
+</p>
+
+<section class="layout">
+    <div class="sidebar">
+        <p><a class="a1" href="{% url 'forum_index' course.course_id %}"
+               style="color: white;position:relative;left: 1%;font-size: large">
+            论坛</a>
+            {% if  flag %}
+                <a class="a1" onclick="return delete_();" href="{% url 'delete_course' course.course_id %}"
+                   style="color: white;font-size: large;position: relative;left: 2%">删除</a>
+            {% endif %} </p>
+        <section class="layout1">
+            <h3 style="color: white;position: relative;left: 1%">课程简介：</h3>
+            <div style="">
+                <p style="color: white;font-size: large;margin-left: 7%;margin-right: 10%"> {{ course.course_intro }}</p>
+            </div>
+
+
+            <div>
+                <h3 style="color: white;position: relative;left: 1%">资料列表：</h3>
+                {% if flag %}
+                    <form method="post" enctype="multipart/form-data" class="file-upload-form">
+                        {% csrf_token %}
+                        <input type="file" name="file" class="file-input"
+                               style="color: white;position: relative;left: 1%">
+                        <button type="submit" style="position:absolute;left: 20%;top:58%"> 上传</button>
+                    </form>
+                {% endif %}
+
+                {% for file in files %}
+                    <li><a href="{% url 'download_file' file.file_id %}"
+                           style="font-size: larger;color: white;position: relative;left: 7%;"> {{ file.filename }}</a>
+                        <a style="color: white;position: relative;left: 7%;
+                            onclick=" return delete_();" href="{% url 'delete_file' file.file_id %}">--------delete</a>
+                    </li>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    <div class="body">
+
+        <div>
+            {% if flag %}
+                <p>
+                    <!-- 如果flag为True,说明用户为老师，则可以看到隶属题目，以及可以上传文件 -->
+                    <a class="a1" href="{% url 'question_list' course.course_id %}"
+                       style="color: white;position:relative;left: 1%;font-size: larger">隶属题目</a>
+                    <a class="a1" href="{% url 'createquestion' %}"
+                       style="color: white;position:relative;left: 1%;font-size: larger">创建题目</a>
+                </p>
+                <h3 style="color: white">题目速览：</h3>
+                {% for question in questions %}
+                    <li><a href="{% url 'question_detail' question.question_id %}"
+                           style="color: white;font-size: x-large">{{ forloop.counter }}. <span
+                            style="color: white;font-size: large">{{ question.content }}</span></a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+    function delete_() {
+        if (confirm("确定要删除吗?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

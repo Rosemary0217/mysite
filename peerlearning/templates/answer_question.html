@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>答题页面</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+</head>
+<body>
+<div class="top">
+    <ul>
+
+        <br><span style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——答题</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+<ul>
+    <li role="presentation">
+        {% if is_teacher %}
+        	<a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}"style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}"style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}"style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="#"style="color: white">答题</a></li>
+</ul>
+</div>
+
+<p style="color: white;font-size: large;position: relative;left: 2%"> {{ question.content }}</p>
+
+{% if is_answered == False %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="answer" style="color: white;font-size: large;position: relative;left: 2%">答案：</label>
+        <div id="answer" style="color: white;font-size: large;position: relative;left: 3%" >
+            <input type="checkbox" name="option" value="A"  style="color: white;font-size: large;">A
+            <input type="checkbox" name="option" value="B"  style="color: white;font-size: large;">B
+            <input type="checkbox" name="option" value="C"  style="color: white;font-size: large;">C
+            <input type="checkbox" name="option" value="D"  style="color: white;font-size: large;">D
+        </div>
+
+        <label for="reason" style="color: white;font-size: large;position: relative;left: 2%">理由：</label>
+        <input type="text" id="reason" name="reason" style="position: relative;left: 2%"><br>
+
+        <input type="submit" value="提交" style="position: relative;left: 1%">
+    </form>
+{% endif %}
+
+{% if is_answered == True %}
+    <li style="color: white;font-size: large;position: relative;left: 2%"> 你的答案：{{ answer.answer }} --- 正确答案： {{ question.solution }}</li>
+    <li style="color: white;font-size: large;position: relative;left: 2%"> 你的理由： {{ answer.reason }} --- 参考理由： {{ question.sol_reason }}</li>
+{% endif %}
+
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+</body>
+</html>

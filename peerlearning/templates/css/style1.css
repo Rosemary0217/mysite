@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 255)cec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./image/2.png');
+    background-size: cover; 
+  }
+  h2 {
+    position: absolute;
+    top: 5%;
+    left: 49%;
+    transform: translateX(-50%);
+    font-size: 65px; 
+    line-height: 120px; 
+    color:#000000
+ }
+ p {
+    position: absolute;
+    left: 42%;
+}
+
+p:nth-child(1) {
+    top: 30%;
+}
+
+p:nth-child(2) {
+    bottom: 30%;
+} 
+  a {
+    text-align: center;
+    font-size: 24px;
+    line-height: 60px;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b);
+    border-radius: 30px;
+    background-size: 200%;
+    transition: background 0.5s;
+    margin: 0 10px;
+    width: 200px;
+    height: 60px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  aa:hover{
+    animation: animate 8s linear infinite alternate; /*动画: 名称 时间 线性 循环 播放完回退播放*/
+  }
+  @keyframes animate{
+    0%{
+      background-position: 0%; /*修改背景定位，实现渐变色炫光*/
+    }
+    50%{
+      background-position: 100%;
+    }
+    100%{
+      background-position: 0%;
+    }
+  }
+  a::before{ /*之前添加*/
+    content: ''; /*内容*/
+    position: absolute; /*绝对定位*/
+    top:-5px; /*当设置对立的2个定位属性时，元素的大小将由对立的大小决定*/
+    left: -5px;
+    right: -5px;
+    bottom: -5px; /*当设置对立的2个定位属性时，元素的大小将由对立的大小决定*/
+    z-index: -1; 
+    background: linear-gradient(
+      90deg,#03a9f4, #f441a5, #ffeb3b, #03a9f4, 
+    #f441a5, #ffeb3b, #03a9f4);
+    border-radius: 40px;
+    background-size: 400%;
+    filter: blur(20px); /*过渡：模糊*/
+    opacity: 0; /*透明度*/
+    transition: 1s; /*过渡时间*/
+  }
+  a:hover::before{
+    filter: blur(20px);
+    opacity: 1;
+    animation: animate 8s linear infinite; /*注意动画名称统一*/
+  }
+  

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>帖子详情</title>
+    <style>
+        .layout {
+            width: 100%;
+
+            display: grid;
+            grid:
+    "title" auto
+    "content" 1fr
+    "comment" auto
+    / 1fr;
+            gap: 8px;
+        }
+
+        .title {
+            grid-area: title;
+        }
+
+        .content {
+            grid-area: content;
+        }
+
+        .comment {
+            grid-area: comment;
+        }
+    </style>
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+</head>
+<body>
+<div class="top">
+    <ul>
+
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——帖子详情</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+<ul>
+    <li role="presentation">
+        {% if is_teacher %}
+            <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}"
+                               style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="{% url 'forum_index' course_id %}" style="color: white">论坛主页</a></li>
+    <li role="presentation"><a href="#" style="color: white">{{ post.title }}</a></li>
+</ul>
+</div>
+
+<section class="layout">
+    <div class="title">
+        <h3 style="color: white;position: relative;left: 1%">标题：{{ post.title }} <small
+                style="color: white">{{ user.name }} -- {{ post.time }}</small></h3>
+    </div>
+    <div class="content">
+        <p style="color: white;position: relative;left: 1%;font-size: large"> 正文：{{ post.content }}</p>
+        {% if  user.user_id == cur_user.user_id %}
+            <p><a style="font-size: 18px;color: white;position:relative;left: 1%" onclick="return delete_();"
+                  href="{% url 'delete_post'  post.post_id %}">删除该帖</a></p>
+        {% endif %}
+    </div>
+
+    <div class="comment"><hr>
+        {% for comment in comments %}
+            <p style="color: white;position:relative;left: 1%;"> {{ comment.user.name }}:  {{ comment.content }} <small>——{{ comment.comment_time }}</small>
+                {% if  comment.user.user_id == cur_user.user_id %}
+                    <td><a style="font-size: 15px;margin-left: 10px" onclick="return delete_();"
+                              href="{% url 'delete_comment' comment.comment_id %}">删除评论</a></td>
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+</section>
+
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <input type="comment" id="comment" name="comment" placeholder="请输入评论" style="width: 500px;position:relative;left: 1%">
+    <input type="submit" value="发布" style="margin-left: 15px">
+</form>
+
+<script type="text/javascript" language="JavaScript">
+    function delete_() {
+        if (confirm("确定要删除吗?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建题目</title>
+<!--     {% load static %}-->
+<!--    <link rel="stylesheet" href="{% static 'css/css.css' %}"/>-->
+
+    <style>
+        #main{
+            width: 480px;
+            height: 330px;
+            opacity:0.9;/*透明度 0-1*/
+            border-radius: 10px;
+            position: relative;
+            left: 1%;
+        }
+        #answer{
+            width: 480px;
+            height: 45px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .register{
+            margin-left: 20px;
+            color:silver;
+            font-size: 10px;
+        }
+        .p1{
+            line-height: 50px;
+            position: relative;
+            left: 1%;
+        }
+		.p3{
+            line-height: 35px;
+            text-align: center;
+			font-size: 15px;
+        }
+        .inp0{
+            width: 360px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: aliceblue;
+            border: 1px solid white;
+            outline: none;/*获得焦点时无任何显示*/
+            text-indent: 1em;/*缩进*/
+            font-size: 13px;
+        }
+
+        .p2{
+            width: 500px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid white;
+            background-color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+        }
+        .p2:hover{
+            cursor:pointer;
+        }
+
+        .d{
+            text-decoration: none;
+            color: rgb(75, 30, 30);
+            font: 600 30px '';
+            line-height: 150px;
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+</head>
+<body>
+<div class="top">
+    <ul>
+        <br><span style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——编辑题目</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+    <div class="nav11">
+    <ul>
+    <li role="presentation">
+        {% if is_teacher %}
+        	<a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}" style="color: white">{{ course.course_name }}</a></li>
+        <li role="presentation"><a href="{% url 'question_list' course_id %}" style="color: white">隶属题目</a></li>
+    <li role="presentation"><a href="{% url 'question_detail' question.question_id%}" style="color: white">题目详情</a></li>
+    <li role="presentation"><a href="#" style="color: white">编辑题目</a></li>
+    </ul>
+
+    </div>
+{#            <p class="p1">#}
+{#                题目内容:<input type="text" name="content" placeholder="请输入题目内容" class="inp0" value="{{ question.content }}">#}
+{#            </p>#}
+   <form method="post">
+        {% csrf_token %}
+        <div id="main">
+            <p class="p1" style="color: white">
+{#                <input type="text" name="content" placeholder="请输入题目内容" class="inp0">#}
+                &nbsp &nbsp题目内容：<textarea class="form-control" rows="10" id="content" name="content" style="width: 500px;margin-left: 10px" placeholder={{ question.content }}">{{ question.content }}</textarea>
+            </p>
+
+            &nbsp &nbsp &nbsp<span style="color: white">题目答案：</span>
+            <div id="answer" style="color: white">
+                <input type="checkbox" name="option" value="A">A
+			    <input type="checkbox" name="option" value="B">B
+                <input type="checkbox" name="option" value="C">C
+                <input type="checkbox" name="option" value="D">D
+            </div>
+
+			<p class="p1">
+				<div style="color: white"> &nbsp &nbsp &nbsp是否公开:
+					<label><input type="radio" name="choice" value="1">是</label>
+					<label><input type="radio" name="choice" value="0">否</label>
+				</div>
+			</p>
+
+				&nbsp &nbsp &nbsp<span style="color: white">题目标签：</span>
+				<div id="tag" class="p3">
+					<select name="tag">
+						<option value="NULL">--请选择题目标签--</option>
+						<option value="数学">数学</option>
+						<option value="物理">物理</option>
+						<option value="英语">英语</option>
+						<option value="计算机">计算机</option>
+					</select>
+				</div>
+
+            <p class="p1">
+                <button type="submit" class="p2">提交</button>
+            </p>
+
+        </div>
+
+    </form>
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+
+
+</body>
+</html>
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+
+
+	<head>
+
+		<style>
+
+			    @font-face {
+			        font-family: 'FontAwesome';
+			        src: url('./fontawesome-webfont.eot');
+			        src: url('./fontawesome-webfont.eot') format('embedded-opentype'),
+			            url('./fontawesome-webfont.woff2') format('woff2'), url('.fontawesome-webfont.woff') format('woff'),
+			            url('./fontawesome-webfont.ttf') format('truetype'),
+			            url('./fontawesome-webfont.svg') format('svg');
+			        font-weight: normal;
+			        font-style: normal;
+			    }
+
+			    .search-box {
+			        font-family: FontAwesome;
+			        position: absolute;
+			        top: 30%;
+			        left: 50%;
+			        transform: translate(-50%, -50%);
+			        background: #ffffff;
+			        height: 40px;
+			        border: 10px;
+			        border-radius: 40px;
+			        padding: 10px;
+			        opacity: 0;
+			        transition-delay: 99999999s;
+			        transition-duration: 1s;
+			    }
+
+			    .search-box:hover>.search-txt {
+			        width: 240px;
+			        padding: 0 6px;
+			    }
+
+			    .search-box:hover>.search-btn {
+			        color: white;
+			        background: black;
+			    }
+
+			    .search-btn {
+			        transition: 0.5s;
+			        font-family: FontAwesome;
+			        font-size: 25px;
+			        color: black;
+			        float: right;
+			        width: 40px;
+			        height: 40px;
+			        border: 10px;
+			        border-radius: 50%;
+			        background: #ffffff;
+			        display: flex;
+			        justify-content: center;
+			        align-items: center;
+			        text-decoration: none;
+			    }
+
+			    .search-txt {
+			        border: none;
+			        background: none;
+			        outline: none;
+			        float: left;
+			        padding: 0;
+			        color: rgb(51, 159, 150);
+			        font-size: 16px;
+			        transition: 0.6s;
+			        line-height: 50px;
+			        width: 0px;
+			    }
+
+			    @keyframes flash {
+			        50% {
+			            transform: scale(1.5);
+			        }
+
+			        80% {
+			            transform: rotate(-60deg);
+			        }
+
+			        100% {
+			            transform: rotate(30deg);
+			        }
+
+
+			    }
+			    html:hover .search-box {
+			        opacity: 1;
+			        transition-delay: 0s;
+			        transition-duration: 0s;
+			    }
+
+			</style>
+		</head>
+	<body style="background-color: bisque;">
+
+		<center>
+		    <div class="search-box">
+		        <input class="search-txt" type='text' id='inp' placeholder="What are you looking for?"/>
+		        <input class="search-btn" type='button' id='btn' value='&#xf002' />
+		    </div>
+			<div>
+			</div>
+		</center>
+
+
+		</body>
+
+
+	<script>
+	    var oInp = document.getElementById('inp');
+	    var oBtn = document.getElementById('btn');
+
+	    oBtn.onclick = function () {
+	        Search();
+	    }
+
+	    document.onkeydown = function () {
+	        if (event.keyCode == 13) {
+	            Search();
+	        }
+	    }
+
+	    function Search() {
+	        var url = 'https://www.baidu.com/s?wd=' + oInp.value;
+	        window.open(url);
+	    }
+	</script>
+
+	</html> {% endcomment %}

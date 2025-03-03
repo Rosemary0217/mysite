@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正确率统计</title>
+</head>
+<body>
+    <h1>Chart</h1>
+    {% if accuracy_image %}
+        <img src="data:image/png;base64,{{ accuracy_image }}" alt="Line Chart">
+    {% endif %}
+</body>
+</html>

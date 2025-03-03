@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>论坛</title>
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+        <link rel="stylesheet" href="../../static/css/style1.css">
+
+</head>
+<body>
+
+<div class="top">
+    <ul>
+
+        <br><span style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——{{ course.course_name }}——论坛</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+
+<div class="nav11">
+<ul>
+    <li role="presentation">
+        {% if is_teacher %}
+        	<a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}" style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="#" style="color: white">论坛主页</a></li>
+</ul>
+</div>
+<p><a href="{% url 'add_post' %}" class="btn btn-primary btn-lg" style="position:relative;left: 1%">发布一个新帖子</a></p>
+
+<ul>
+    <table class="table" style="color: white">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>标题</th>
+            <th>发起人</th>
+            <th>发布时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'post_detail' post.post_id %}" style="color:white;">{{ post.title }}</a></td>
+                <td>{{ post.user.name }}</td>
+                <td>{{ post.time }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</ul>
+
+
+<!--分页-->
+<ul class="pagination" style="color: white">
+    <li style="position:relative;left: 1%">
+        {{ page_string }}
+    </li>
+</ul>
+
+
+</body>
+</html>

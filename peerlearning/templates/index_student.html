@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生主页面</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+    <style type="text/css">
+
+
+        .p1 {
+            position: absolute;
+            font-size: larger;
+            color: white;
+            left: 25%;
+            bottom: 14%;
+
+            font-family: "Microsoft JhengHei";
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 3px;
+        }
+
+        .p2 {
+            position: absolute;
+            left: 60%;
+            font-size: larger;
+            color: white;
+            bottom: 14%;
+
+            font-family: "Microsoft JhengHei";
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 3px;
+        }
+
+        .box {
+            width: 1000px;
+            height: 460px;
+            position: relative;
+        }
+
+        .box-img {
+            position: absolute;
+            top: 50px;;
+            left: 220px;;
+            opacity: 0;
+            transition: all 1.5s;
+        }
+
+        .box-img:nth-child(1) {
+            opacity: 1;
+        }
+
+        .box-left {
+            position: absolute;
+            width: 35px;
+            height: 70px;
+            color: #ccc;
+            top: 270px;
+            border-radius: 0 5px 5px 0;
+            text-align: center;
+            line-height: 70px;
+            font-size: 27px;
+            left: 220px;
+        }
+
+        .box-left:hover {
+            background-color: #00000050;
+            color:
+        }
+
+        .box-right {
+            position: absolute;
+            width: 65px;
+            height: 70px;
+            color: #ccc;
+            top: 270px;
+            border-radius: 0 5px 5px 0;
+            text-align: center;
+            line-height: 70px;
+            font-size: 27px;
+            right: -220px;
+        }
+
+        .box-right:hover {
+            background-color: #00000050;
+            color: #ccc;
+        }
+
+
+        .nav-tabs > li > a {
+            padding: 20px 15px; /* 调整内边距以改变选中框大小 */
+        }
+
+        /* 其他样式属性 */
+    </style>
+</head>
+<link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+
+<body>
+<div class="top">
+    <ul>
+
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——学生主页面</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+<br><br><br>
+<div class="nav11">
+    <ul>
+    <li role="presentation"><a href="#" style="color: white">个人主页</a></li>
+    </ul>
+
+</div>
+
+<div class="p1"><a href="{% url 'courselist' %}" style="color: white;font-size: x-large">课程列表</a></div>
+<div class="p2"><a href="{% url 'review_history' %}" style="color: white;font-size: x-large">回顾历史</a></div>
+
+
+<div class="box">
+    <div class="box-img"><img src="../../static/images/1.jpg" width="1000" height="460"></div>
+    <div class="box-img"><img src="../../static/images/2.jpg" width="1000" height="460"></div>
+    <div class="box-img"><img src="../../static/images/3.jpg" width="1000" height="460"></div>
+    <div class="box-img"><img src="../../static/images/4.jpg" width="1000" height="460"></div>
+    <div class="box-img"><img src="../../static/images/5.jpg" width="1000" height="460"></div>
+    <div class="box-img"><img src="../../static/images/6.jpg" width="1000" height="460"></div>
+    <div class="box-left">&lt;</div>
+    <div class="box-right">&gt;</div>
+    <script type="text/javascript" src="../../static/js/jquery-3.4.1.min.js"></Script>
+    <script type="text/javascript">
+        $(function () {
+            var index = 0;//标记当前图片索引
+            var f;
+            dingshiqi();
+
+            function dingshiqi() {
+                var f = setInterval(function () {
+                    if (index == $(".box-img").length - 1) {
+                        index = 0;
+                        $(".box-img").css("opacity", "0");
+                        $(".box-img").eq(index).css("opacity", "1");
+                    } else {
+                        index++;
+                        $(".box-img").css("opacity", "0");
+                        $(".box-img").eq(index).css("opacity", "1");
+                    }
+                }, 4000)
+            }
+
+            $(".box-left").click(function () {
+                if (index == 0) {
+                    index = $(".box-img").length - 1;
+                    $(".box-img").css("opacity", "0");
+                    $(".box-img").eq(index).css("opacity", "1");
+                } else {
+                    index--;
+                    $(".box-img").css("opacity", "0");
+                    $(".box-img").eq(index).css("opacity", "1");
+                }
+            })
+            $(".box-right").click(function () {
+                if (index == $(".box-img").length - 1) {
+                    index = 0;
+                    $(".box-img").css("opacity", "0");
+                    $(".box-img").eq(index).css("opacity", "1");
+                } else {
+                    index++;
+                    $(".box-img").css("opacity", "0");
+                    $(".box-img").eq(index).css("opacity", "1");
+                }
+
+            })
+            $(".botton").click(function () {
+                var indexx = $(this).index();
+                index = indexx;
+                $(".box-img").css("opacity", "0");
+                $(".box-img").eq(index).css("opacity", "1");
+            })
+        })
+    </script>
+</div>
+
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+</body>
+</html>

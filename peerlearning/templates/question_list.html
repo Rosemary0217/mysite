@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>题目列表</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+            <link rel="stylesheet" href="../../static/css/style1.css">
+
+    <style>
+        .a1 {
+            font-family: "Microsoft JhengHei";
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="top">
+    <ul>
+
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——题目列表</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+
+<br><br><br>
+<div class="nav11">
+<ul>
+    <li role="presentation">
+        {% if is_teacher %}
+            <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+        {% endif %}
+        {% if is_teacher == False %}
+            <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+        {% endif %}
+    </li>
+    <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+    <li role="presentation"><a href="{% url 'course_detail' course_id %}"
+                               style="color: white">{{ course.course_name }}</a></li>
+    <li role="presentation"><a href="#" style="color: white">隶属题目</a></li>
+</ul>
+</div>
+
+
+{% for question in questions %}
+    <li><a class="a1" href="{% url 'question_detail' question.question_id %}"
+           style="color: white;font-size: large">{{ forloop.counter }}. <span
+            style="color: white;font-size: large">{{ question.content }}</span></a>
+    </li>
+{% endfor %}
+
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+
+
+</body>
+</html>

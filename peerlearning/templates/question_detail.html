@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>题目详情</title>
+    <link rel="stylesheet" href="../../static/css/top_footer.css">
+    <link rel="stylesheet" href="../../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style1.css">
+
+    <style>
+        .a1 {
+            font-family: "Microsoft JhengHei";
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 3px;
+        }
+
+        .layout {
+            width: 1366px;
+            height: 600px;
+
+            display: grid;
+            grid:
+    "sidebar body" 1fr
+    / 40% 60%;
+            gap: 200px;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .body {
+            grid-area: body;
+        }
+    </style>
+</head>
+<script type="text/javascript" language="JavaScript">
+    function delete_() {
+        if (confirm("确定要删除吗?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<body>
+<div class="top">
+    <ul>
+
+        <br><span
+            style="color: rgb(244, 240, 240); font-weight: bold;font-size: x-large;position:absolute;top: 15px;left: 10px;">同伴教学法——题目详情</span>
+
+        <li><a href="{% url 'accounts:log_out' %}">退出登录</a></li>
+    </ul>
+</div>
+
+<br><br><br>
+<div class="nav11">
+    <ul>
+        <li role="presentation">
+            {% if is_teacher %}
+                <a href="{% url 'indexteacher' %}" style="color: white">个人主页</a>
+            {% endif %}
+            {% if is_teacher == False %}
+                <a href="{% url 'index_student' %}" style="color: white">个人主页</a>
+            {% endif %}
+        </li>
+        <li role="presentation"><a href="{% url 'courselist' %}" style="color: white">课程列表</a></li>
+        <li role="presentation"><a href="{% url 'course_detail' course_id %}"
+                                   style="color: white">{{ course.course_name }}</a></li>
+        <li role="presentation"><a href="{% url 'question_list' course_id %}" style="color: white">隶属题目</a></li>
+        <li role="presentation"><a href="#" style="color: white">题目详情</a></li>
+    </ul>
+</div>
+
+
+<section class="layout">
+    <div class="sidebar">
+        <h3 style="color: white;position: relative;left: 2%">题目内容:</h3>
+        <p style="color: white;font-size: large;position: relative;left: 10%"> {{ question.content }}</p>
+
+        <p>{% if course_id == question.course.course_id %}
+            <a class="a1" href="{% url 'edit_question' question.question_id %}"
+               style="color: white;font-size: large;position: relative;left: 1%">编辑</a> &nbsp;| &nbsp;
+            <a class="a1" onclick="return delete_();" href="{% url 'delete_question' question.question_id %}"
+               style="color: white;font-size: large;position: relative;left: 2%">删除</a>
+        {% endif %}</p>
+
+        <p><a class="a1" href="{% url 'accuracy_dis' question.question_id %}"
+              style="color: white;font-size: large;position: relative;left: 1%"> 正确率分布</a></p>
+    </div>
+    <div class="body">
+        <h3 style="color: white;position: relative;left: 2%">答案详情:</h3>
+        <p style="color: white;font-size: large;position: relative;left: 8%">正确选项: {{ question.solution }}</p>
+        <p style="color: white;font-size: large;position: relative;left: 8%"> 参考理由： {{ question.sol_reason }}</p>
+        <p style="color: white;font-size: large;position: relative;left: 8%"> 正确率： {{ accuracy }}</p>
+
+        <a class="a1" href="{% url 'publish_question' question.question_id %} "
+           style="color: white;font-size: large;position: relative;left: 1%"> 发布</a>
+        <a class="a1" href="{% url 'stop_question' question.question_id %}"
+           style="color: white;font-size: large;position: relative;left: 1%"> 停止答题</a>
+        <a class="a1" href="{% url 'question_statu' question.question_id %}"
+           style="color: white;font-size: large;position: relative;left: 1%"> 查看正确率</a>
+    </div>
+</section>
+
+
+</body>
+
+<div id="footer">
+    <br>
+    <p>Copyright 2023 All Rights Reserved. lllc工作室 版权所有</p>
+</div>
+
+</html>
